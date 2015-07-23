@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +11,27 @@ namespace PrisionerDilemma
 	class StrategyPavlov : Strategy
 	{
 		bool myLastDecision;
+
+		public StrategyPavlov()
+		{
+			this.arrayWithEnemyAnswer = new ArrayList();
+		}
+
+		public StrategyPavlov(ArrayList arrayList)
+		{
+			this.arrayWithEnemyAnswer = arrayList;
+		}
+
 		public override bool getDecision()
 		{
 			if ((arrayWithEnemyAnswer.Count > 0) && ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1]) != myLastDecision)
 			{
-				return myLastDecision = defect;
+				return myLastDecision = Decision.DEFECT;
 			}
 			else 
 			{
-				myLastDecision = cooperate;
-				return cooperate;
+				myLastDecision = Decision.COOPERATE;
+				return Decision.COOPERATE;
 			}
 		}
 	}

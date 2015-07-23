@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,27 +12,39 @@ namespace PrisionerDilemma
 	{
 		bool nextDecision;
 
+		public StrategyTitForTwoTat()
+		{
+			this.arrayWithEnemyAnswer = new ArrayList();
+		}
+
+		public StrategyTitForTwoTat(ArrayList arrayList)
+		{
+			this.arrayWithEnemyAnswer = arrayList;
+			if (this.arrayWithEnemyAnswer.Count > 1)
+				nextDecision = (bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 2];
+		}
+
 		public override bool getDecision()
 		{
 			if (arrayWithEnemyAnswer.Count == 0)
 			{
-				nextDecision = cooperate;
-				return cooperate;
+				nextDecision = Decision.COOPERATE;
+				return Decision.COOPERATE;
 			}
-			else if (nextDecision)
+			else if ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == Decision.COOPERATE)
 			{
-				nextDecision = cooperate;
-				return defect;
+				nextDecision = Decision.COOPERATE;
+				return Decision.COOPERATE;
 			}
-			else if ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == cooperate)
+			else if (nextDecision == Decision.DEFECT)
 			{
-				nextDecision = cooperate;
-				return cooperate;
+				nextDecision = Decision.COOPERATE;
+				return Decision.DEFECT;
 			}
 			else
 			{
-				nextDecision = defect;
-				return cooperate;
+				nextDecision = Decision.DEFECT;
+				return Decision.COOPERATE;
 			}
 		}
 	}

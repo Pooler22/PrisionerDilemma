@@ -14,15 +14,15 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyCooperate");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
 		}
 
 		[TestMethod]
@@ -30,15 +30,15 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyDefect");
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
 		}
 
 		[TestMethod]
@@ -54,14 +54,14 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyTruePeaceMaker");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
 		}
 
 		[TestMethod]
@@ -69,13 +69,13 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyTitForTat");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
 			
 		}
 
@@ -84,28 +84,19 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyTitForTwoTat");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.currentStrategy.arrayWithEnemyAnswer.Clear();
-
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.currentStrategy.arrayWithEnemyAnswer.Clear();
-
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
 		}
 
 		[TestMethod]
@@ -113,9 +104,9 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyNaivePeaceMake");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
 		}
 
 		[TestMethod]
@@ -123,17 +114,17 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyGrudger");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
 		}
 
 		[TestMethod]
@@ -141,17 +132,17 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategySuspiciousTitForTat");
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
 		}
 
 		[TestMethod]
@@ -159,17 +150,17 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyPavlov");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
 		}
 
 		[TestMethod]
@@ -177,12 +168,12 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyNativeProber");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
 		}
 
 		[TestMethod]
@@ -190,18 +181,18 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyGradual");
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-			player.updateDetails(player.defect, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			Assert.AreEqual<bool>(player.getDecision(), player.defect);
-			player.updateDetails(player.cooperate, 0);
-			Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+			player.setDetails(Decision.DEFECT, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
+			player.setDetails(Decision.COOPERATE, 0);
+			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
 		}
 
 		[TestMethod]
@@ -209,13 +200,13 @@ namespace UnitTestProject
 		{
 			Player player = new Player();
 			player.setStrategy("StrategyRemorsefulProber");
-			player.updateDetails(player.cooperate, 0);
-			if(player.getDecision() == player.defect)
+			player.setDetails(Decision.COOPERATE, 0);
+			if(player.getDecision() == Decision.DEFECT)
 			{
-				player.updateDetails(player.defect, 0);
-				Assert.AreEqual<bool>(player.getDecision(), player.cooperate);
-				player.updateDetails(player.defect, 0);
-				Assert.AreEqual<bool>(player.getDecision(), player.defect);
+				player.setDetails(Decision.DEFECT, 0);
+				Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
+				player.setDetails(Decision.DEFECT, 0);
+				Assert.AreEqual<bool>(player.getDecision(), Decision.DEFECT);
 			}
 		}	
 	}

@@ -12,15 +12,18 @@ namespace PrisionerDilemma
 		bool probing = false;
 		public override bool getDecision()
 		{
-			if (probing && ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == defect)) 
+			if (arrayWithEnemyAnswer.Count > 0)
 			{
-				probing = false;
-				return cooperate;
-			}
-			else if (new StrategyRandom().getDecision() && ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == cooperate))
-			{
-				probing = true;
-				return defect;
+				if (probing && ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == Decision.DEFECT))
+				{
+					probing = false;
+					return Decision.COOPERATE;
+				}
+				else if (new StrategyRandom().getDecision() && ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == Decision.COOPERATE))
+				{
+					probing = true;
+					return Decision.DEFECT;
+				}
 			}
 			return new StrategyTitForTat(arrayWithEnemyAnswer).getDecision();
 		}

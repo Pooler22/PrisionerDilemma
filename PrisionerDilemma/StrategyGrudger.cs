@@ -13,17 +13,17 @@ namespace PrisionerDilemma
 
 		public override bool getDecision()
 		{
-			if ((arrayWithEnemyAnswer.Count > 0) && ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == defect))
+			if ((arrayWithEnemyAnswer.Count > 0) && ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == Decision.DEFECT))
 			{
 				unforgivinglyFlag = true;
 			}
 			if (unforgivinglyFlag)
 			{
-				return defect;
+				return Decision.DEFECT;
 			}
 			else
 			{
-				return cooperate;
+				return Decision.COOPERATE;
 			}
 		}
 	}

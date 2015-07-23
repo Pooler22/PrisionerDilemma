@@ -14,18 +14,18 @@ namespace PrisionerDilemma
 
 		public override bool getDecision()
 		{
-			if ((arrayWithEnemyAnswer.Count > 0) && (bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == defect)
+			if ((arrayWithEnemyAnswer.Count > 0) && (bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == Decision.DEFECT)
 			{
 				defectNumber++;
 				currentDefectNumber++;
-				return defect;
+				return Decision.DEFECT;
 			}
 			if (currentDefectNumber != defectNumber)
 			{
 				currentDefectNumber++;
-				return defect;
+				return Decision.DEFECT;
 			}
-			return cooperate;
+			return Decision.COOPERATE;
 		}
 	}
 }

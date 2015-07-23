@@ -8,10 +8,8 @@ namespace PrisionerDilemma
 {
 	public class Player
 	{
-		public bool defect = true;
-		public bool cooperate = false;
-		public int score;
-		public Strategy currentStrategy;
+		int score;
+		Strategy currentStrategy;
 		
 		public Player() 
 		{
@@ -23,17 +21,25 @@ namespace PrisionerDilemma
 			currentStrategy = (Strategy)Activator.CreateInstance(Type.GetType("PrisionerDilemma." + strategyName));
 		}
 
+		public void setPlayerDecision(bool decision)
+		{
+			currentStrategy.setPlayerDecision(decision);
+		}
+
 		public bool getDecision()
 		{
 			return currentStrategy.getDecision();
 		}
 
-		public void updateDetails(bool enemyAnswer, int score) 
+		public int getScore()
+		{
+			return this.score;
+		}
+
+		public void setDetails(bool enemyAnswer, int score) 
 		{
 			currentStrategy.arrayWithEnemyAnswer.Add(enemyAnswer);
 			this.score += score;
 		}
-
-		/*strategy name and description convention http://www.iterated-prisoners-dilemma.net/prisoners-dilemma-strategies.shtml */
 	}
 }

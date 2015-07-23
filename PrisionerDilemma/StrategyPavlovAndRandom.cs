@@ -15,7 +15,7 @@ namespace PrisionerDilemma
 			{
 				return new StrategyRandom().getDecision();
 			}
-			return new StrategyPavlov().getDecision();
+			return new StrategyPavlov(arrayWithEnemyAnswer).getDecision();
 		}
 	}
 }

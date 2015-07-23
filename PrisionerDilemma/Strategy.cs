@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*strategy name and description convention from http://www.iterated-prisoners-dilemma.net/prisoners-dilemma-strategies.shtml */
+
 namespace PrisionerDilemma
 {
 	public abstract class Strategy
 	{
-		public bool defect = true;
-		public bool cooperate = false;
 		public ArrayList arrayWithEnemyAnswer;
+		public bool decision;
 
 		public Strategy() {
 			arrayWithEnemyAnswer = new ArrayList();
@@ -23,5 +24,10 @@ namespace PrisionerDilemma
 		}
 
 		public abstract bool getDecision();
+
+		public void setPlayerDecision(bool decision)
+		{
+			this.decision = decision;
+		}
 	}
 }

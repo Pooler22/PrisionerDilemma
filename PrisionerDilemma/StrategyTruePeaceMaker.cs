@@ -11,15 +11,9 @@ namespace PrisionerDilemma
 	{		
 		public override bool getDecision()
 		{
-			if (arrayWithEnemyAnswer.Count == 0)
-			{
-				return cooperate;
-			}
-			else if (((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == defect) && (new StrategyRandom().getDecision()))
-			{
-				return cooperate;
-			}
-			return new StrategyTitForTatAndRandom().getDecision();
+			if (new StrategyTitForTwoTat(arrayWithEnemyAnswer).getDecision() == Decision.DEFECT && new StrategyRandom().getDecision())
+				return Decision.COOPERATE;
+			return new StrategyTitForTwoTat(arrayWithEnemyAnswer).getDecision();
 		}
 	}
 }

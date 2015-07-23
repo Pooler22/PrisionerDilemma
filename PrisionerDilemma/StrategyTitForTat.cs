@@ -13,20 +13,19 @@ namespace PrisionerDilemma
 
 		public StrategyTitForTat()
 		{
-			arrayWithEnemyAnswer = new ArrayList();
+			this.arrayWithEnemyAnswer = new ArrayList();
 		}
 
 		public StrategyTitForTat(ArrayList arrayList)
 		{
 			this.arrayWithEnemyAnswer = arrayList;
 		}
-		
 
 		public override bool getDecision()
 		{
 			if (arrayWithEnemyAnswer.Count == 0)
 			{
-				return cooperate;
+				return Decision.COOPERATE;
 			}
 			else 
 			{

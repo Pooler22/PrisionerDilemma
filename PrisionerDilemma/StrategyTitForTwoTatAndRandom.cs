@@ -12,13 +12,10 @@ namespace PrisionerDilemma
 		public override bool getDecision()
 		{
 			if (new StrategyRandom().getDecision())
-			{
-				return new StrategyTitForTwoTat().getDecision();
-			}
-			else 
-			{
 				return new StrategyRandom().getDecision();
-			}
+			else 
+				return new StrategyTitForTwoTat(arrayWithEnemyAnswer).getDecision();
+				
 		}
 	}
 }

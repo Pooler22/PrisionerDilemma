@@ -12,10 +12,8 @@ namespace PrisionerDilemma
 		public override bool getDecision()
 		{
 			if (arrayWithEnemyAnswer.Count > 0)
-			{
-				return new StrategyTitForTat(this.arrayWithEnemyAnswer).getDecision();
-			}
-			return defect;
+				return new StrategyTitForTat(arrayWithEnemyAnswer).getDecision();
+			return Decision.DEFECT;
 		}
 	}
 }

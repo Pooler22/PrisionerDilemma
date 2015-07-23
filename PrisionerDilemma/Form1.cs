@@ -12,17 +12,139 @@ namespace PrisionerDilemma
 {
 	public partial class Form1 : Form
 	{
+		string[] arrayStrategyNames = {   "StrategyCooperate","StrategyDefect","StrategyGenetic","StrategyGradual","StrategyGrudger",
+										  "StrategyNaivePeaceMaker","StrategyNativeProber","StrategyPavlov","StrategyPavlovAndRandom",
+										  "StrategyRandom", "StrategyRemorsefulProber","StrategySuspiciousTitForTat","StrategyTitForTat",
+										  "StrategyTitForTatAndRandom","StrategyTitForTwoTat", "StrategyTitForTwoTatAndRandom",
+										  "StrategyTruePeaceMaker", "StrategyHomoSapiens"
+									  };
+		bool flagStrategy1Selected = false, flagStrategy2Selected = false;
+		bool flagPlayer1Decision = false, flagPlayer2Decision = false;
+		Server server;
+
+		int cooperateDefectRule = 3;
+		int defectDefectRule = 2;
+		int cooperateCooperateRule = 1;
+		int defectCooperateRule = 0;
+
 		public Form1()
 		{
 			InitializeComponent();
-			Server server = new Server();
-			server.setStrategy("StrategyDefect", "StrategyTitForTat");
-			server.play();
-			Console.WriteLine(server.player1.score);
-			Console.WriteLine(server.player2.score);
-			server.play();
-			Console.WriteLine(server.player1.score);
-			Console.WriteLine(server.player2.score);
+			comboBoxPlayer1.Items.AddRange(arrayStrategyNames);
+			comboBoxPlayer2.Items.AddRange(arrayStrategyNames);
+			server = new Server();
+			server.setRules(defectCooperateRule, cooperateCooperateRule, defectDefectRule, cooperateDefectRule);
+		}
+
+		private void comboBoxPlayer1_SelectionChangeCommitted(object sender, EventArgs e)
+		{
+			server.setStrategy1(comboBoxPlayer1.SelectedItem.ToString());
+			if (comboBoxPlayer1.SelectedIndex == 17)
+			{
+				buttonCooperatePlayer1.Visible = buttonDefectPlayer1.Visible = true;
+			}
+			else 
+			{
+				buttonCooperatePlayer1.Visible = buttonDefectPlayer1.Visible = false;
+				flagPlayer1Decision = true;
+			}
+			flagStrategy1Selected = true;
+		}
+
+		private void comboBoxPlayer2_SelectionChangeCommitted(object sender, EventArgs e)
+		{
+			server.setStrategy2(comboBoxPlayer2.SelectedItem.ToString());
+			if (comboBoxPlayer2.SelectedIndex == 17)
+			{
+				buttonCooperatePlayer2.Visible = buttonDefectPlayer2.Visible = true;	
+			}
+			else
+			{
+				buttonCooperatePlayer2.Visible = buttonDefectPlayer2.Visible = false;
+				flagPlayer2Decision = true;
+			}
+			flagStrategy2Selected = true;
+		}
+
+		private void buttonCooperatePlayer1_Click(object sender, EventArgs e)
+		{
+			server.setPlayerDecision1(Decision.COOPERATE);
+			flagPlayer1Decision = true;
+			check();
+		}
+
+		private void buttonDefectPlayer1_Click(object sender, EventArgs e)
+		{
+			server.setPlayerDecision1(Decision.DEFECT);
+			flagPlayer1Decision = true;
+			check();
+		}
+
+		private void buttonCooperatePlayer2_Click(object sender, EventArgs e)
+		{
+			server.setPlayerDecision2(Decision.COOPERATE);
+			flagPlayer2Decision = true;
+			check();
+		}
+
+		private void buttonDefectPlayer2_Click(object sender, EventArgs e)
+		{
+			server.setPlayerDecision2(Decision.DEFECT);
+			flagPlayer2Decision = true;
+			check();
+		}
+
+		private void check()
+		{
+			if (flagStrategy1Selected && flagStrategy2Selected)
+			{
+				if (flagPlayer1Decision && flagPlayer2Decision)
+				{
+					server.play();
+					
+					if (server.lastAnswerPlayer1 == Decision.DEFECT)
+						labelLastDecisionPlayer1.Text = "defect";
+					else
+						labelLastDecisionPlayer1.Text = "cooperate";
+					if (server.lastAnswerPlayer2 == Decision.DEFECT)
+						labelLastDecisionPlayer2.Text = "defect";
+					else
+						labelLastDecisionPlayer2.Text = "cooperate";
+
+					labelLastScorePlayer1.Text = server.lastScorePlayer1.ToString();
+					labelLastScorePlayer2.Text = server.lastScorePlayer2.ToString();
+					labelTotalScorePlayer1.Text = server.getScore1().ToString();
+					labelTotalScorePlayer2.Text = server.getScore2().ToString();
+
+					if (comboBoxPlayer1.SelectedIndex == 17)
+						flagPlayer1Decision = false;
+					if (comboBoxPlayer2.SelectedIndex == 17)
+						flagPlayer2Decision = false;
+
+				}
+			}
+		}
+
+		private void buttonStartIteration_Click(object sender, EventArgs e)
+		{
+			if (Int32.Parse(textBoxNumberOfIteration.Text) > 0) 
+			{
+				for(int index = 0; index < Int32.Parse(textBoxNumberOfIteration.Text); index++)
+				{
+					check();
+				}
+			}
+		}
+
+		private void buttonHelp_Click(object sender, EventArgs e)
+		{
+			System.Threading.Thread FormHelp = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadFromHelp));
+			FormHelp.Start();
+		}
+
+		public static void ThreadFromHelp()
+		{
+			Application.Run(new FormHelp());
 		}
 	}
 }

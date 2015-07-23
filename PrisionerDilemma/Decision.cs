@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace PrisionerDilemma
 {
-	//Always Defect
-	class StrategyDefect : Strategy
+	static public class Decision
 	{
-		public override bool getDecision()
-		{
-			return Decision.DEFECT;
-		}
+		static public bool COOPERATE = false;
+		static public bool DEFECT = true;
 	}
 }

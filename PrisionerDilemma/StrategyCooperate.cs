@@ -11,7 +11,7 @@ namespace PrisionerDilemma
 	{
 		public override bool getDecision()
 		{
-			return cooperate;
+			return Decision.COOPERATE;
 		}
 	}
 }
