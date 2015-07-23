@@ -53,6 +53,7 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.buttonHelp = new System.Windows.Forms.Button();
+			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -113,6 +114,7 @@
 			this.button5.TabIndex = 27;
 			this.button5.Text = "Save as txt";
 			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.button5_Click);
 			// 
 			// button4
 			// 
@@ -354,6 +356,7 @@
 		private System.Windows.Forms.Button buttonCooperatePlayer1;
 		private System.Windows.Forms.ComboBox comboBoxPlayer2;
 		private System.Windows.Forms.Button buttonHelp;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 	}
 }
 

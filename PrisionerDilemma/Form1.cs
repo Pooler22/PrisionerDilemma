@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,6 +146,30 @@ namespace PrisionerDilemma
 		public static void ThreadFromHelp()
 		{
 			Application.Run(new FormHelp());
+		}
+
+		private void button5_Click(object sender, EventArgs e)
+		{
+			StringBuilder output = new System.Text.StringBuilder();
+			var saveFileDialog1 = new SaveFileDialog
+			{
+				InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+				Filter = string.Format("{0}Text files (*.txt)|*.txt|All files (*.*)|*.*", "ARG0"),
+				RestoreDirectory = true,
+				ShowHelp = true,
+				CheckFileExists = false
+			};
+
+			output.AppendLine(server.player1.currentStrategy.ToString().Substring("PrisionerDilemma.Strategy".Length) + "\t\t" + server.player2.currentStrategy.ToString().Substring("PrisionerDilemma.Strategy".Length));
+			output.AppendLine("Player1\t\t\tPlayer2");
+			if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+				for (int index = 0; index < server.player1.currentStrategy.arrayWithEnemyAnswer.Count; index++)
+					output.AppendLine(
+						server.player1.currentStrategy.arrayWithEnemyAnswer[index].ToString()+
+						"\t\t\t"+
+						server.player2.currentStrategy.arrayWithEnemyAnswer[index].ToString()
+						);
+			File.WriteAllText(saveFileDialog1.FileName, output.ToString());
 		}
 	}
 }

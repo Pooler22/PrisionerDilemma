@@ -9,7 +9,7 @@ namespace PrisionerDilemma
 	public class Player
 	{
 		int score;
-		Strategy currentStrategy;
+		public Strategy currentStrategy;
 		
 		public Player() 
 		{

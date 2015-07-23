@@ -8,99 +8,87 @@ namespace PrisionerDilemma
 {
 	class StrategyGenetic : Strategy
 	{
-		int valuePopulation;
-		int chromosomLength;
-		bool[] arrayPopulation;
-		bool[] arrayNewPopulation;
-		int[] arrayEvaluationOfAdaptation;
+		string[] arrayStrategyNames = {   "StrategyCooperate","StrategyDefect","StrategyGradual","StrategyGrudger","StrategyTruePeaceMaker",
+										  "StrategyNaivePeaceMaker","StrategyNativeProber","StrategyPavlov","StrategyPavlovAndRandom",
+										  "StrategyRandom", "StrategyRemorsefulProber","StrategySuspiciousTitForTat","StrategyTitForTat",
+										  "StrategyTitForTatAndRandom","StrategyTitForTwoTat", "StrategyTitForTwoTatAndRandom"
+									  };
+		int numberOfIteration;
 		int sizeRouletteWheel;
-		int valueIteration;
+		bool lastDecision;
+		List <bool> arrayPopulation;
+		List<bool> arrayNewPopulation;
+		List<int> arrayEvaluationOfAdaptation;
+		Player player;
 
-		public StrategyGenetic(int valuePopulation, int chromosomLength)
+		public StrategyGenetic()
 		{
-			valueIteration = 0;
-			this.valuePopulation = valuePopulation;
-			this.chromosomLength = chromosomLength;
-			arrayPopulation = new bool[valuePopulation * chromosomLength];
-			arrayNewPopulation = new bool[valuePopulation * chromosomLength];
-			arrayEvaluationOfAdaptation = new int[valuePopulation];
-			sizeRouletteWheel = 0;
-		}
-
-		public void setIteration(int valueIteration)
-		{
-			this.valueIteration = valueIteration - 1;
+			numberOfIteration = sizeRouletteWheel = 0;
+			arrayPopulation = new List<bool>();
+			arrayNewPopulation = new List<bool>();
+			arrayEvaluationOfAdaptation = new List<int>();
+			player = new Player();
 		}
 
 		public override bool getDecision()
 		{
 			generatePopulation();
-			evaluationOfAdaptation();
+			if (numberOfIteration > 0)
+				evaluationOfAdaptation();
 			rouletteWheelSelection();
 			hybridization();
 			mutation();
-			
-			for(int index = 0; index < chromosomLength * valuePopulation; index++)
-			{
-				arrayPopulation[index] = arrayNewPopulation[index];
-			}
-
-			return arrayPopulation[valueIteration++];
+			numberOfIteration++;
+			return lastDecision = getChromosome();
 		}
 
-		void generatePopulation()
+		private void generatePopulation()
 		{
-			for (int index1 = 0; index1 < valuePopulation; index1++ )
+			foreach (string element in arrayStrategyNames)
 			{
-				for (int index2 = 0; index2 < chromosomLength; index2++)
-				{
-					arrayPopulation[index1 * valuePopulation + index2] = new Random().Next(0, 2) > 0;
-				}
-				arrayEvaluationOfAdaptation[index1] = 0;
+				player.setStrategy(element);
+				arrayPopulation.Add(player.getDecision());
+				arrayEvaluationOfAdaptation.Add(0);
 			}
 		}
 
-		void evaluationOfAdaptation()
+		private void evaluationOfAdaptation()
 		{
-			for (int index1 = 0; index1 < valuePopulation; index1++)
+			for (int index = 0; index < arrayStrategyNames.Length; index++)
 			{
-				for (int index2 = 0; index2 < arrayWithEnemyAnswer.Count; index2++)
+				if (((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] != Decision.DEFECT) && arrayPopulation[numberOfIteration * arrayStrategyNames.Length + index] != Decision.COOPERATE)
 				{
-					if (arrayPopulation[index1 * valuePopulation + (arrayWithEnemyAnswer.Count - 1)] != Decision.COOPERATE && (bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] != Decision.DEFECT) 
-					{
-						arrayEvaluationOfAdaptation[index1]++;
-						sizeRouletteWheel++;
-					}
+					arrayEvaluationOfAdaptation[index]++;
+					sizeRouletteWheel++;
 				}
 			}
 		}
 
-		void rouletteWheelSelection()
+		private void rouletteWheelSelection()
 		{
-			int tmpSelectedNumber = new Random().Next(0, sizeRouletteWheel);
+			int tmpSelectedNumber;
 			int tmpSum = 0;
 
-			for (int index = 0; index < valuePopulation; index++)
+			for (int index = 0; index < arrayStrategyNames.Length; index++)
 			{
-				for (int index1 = 0; index1 < valuePopulation; index1++)
+				tmpSelectedNumber = new Random().Next(0, sizeRouletteWheel);
+				for (int index1 = 0; index1 < arrayStrategyNames.Length; index1++)
 				{
 					tmpSum += arrayEvaluationOfAdaptation[index1];
 					if (tmpSelectedNumber <= tmpSum)
 					{
-						for (int index2 = 0; index2 < chromosomLength; index2++)
-						{
-							arrayNewPopulation[index * valuePopulation + index2] = arrayPopulation[index1 * valuePopulation + index2];
-						}
+						for (int index2 = 0; index2 < numberOfIteration; index2++)
+							arrayNewPopulation[index * arrayStrategyNames.Length + index2] = arrayPopulation[index1 * arrayStrategyNames.Length + index2];
 						break;
 					}
 				}
 			}
 		}
 
-		void hybridization()
+		private void hybridization()
 		{
-			int locus = new Random().Next(1, chromosomLength - 1);
-			var arrayPair = new int[chromosomLength];
+			int locus = new Random().Next(1, numberOfIteration - 1);
+			int[] arrayPair = new int[arrayStrategyNames.Length];
 			int index = 0;
 			bool tmp;
 
@@ -110,22 +98,27 @@ namespace PrisionerDilemma
 			}
 			new Random().Shuffle(arrayPair);
 
-			while (index < valuePopulation)
+			while (index < arrayStrategyNames.Length)
 			{
-				for (int index1 = locus; index1 < chromosomLength; index1++)
+				for (int index1 = locus; index1 < numberOfIteration; index1++)
 				{
-					tmp = arrayNewPopulation[valuePopulation * arrayPair[index] + index1];
-					arrayNewPopulation[valuePopulation * arrayPair[index] + index1] = arrayNewPopulation[valuePopulation * arrayPair[index + 1] + index1];
-					arrayNewPopulation[valuePopulation * arrayPair[index + 1] + index1] = tmp;
+					tmp = arrayNewPopulation[arrayStrategyNames.Length * arrayPair[index] + index1];
+					arrayNewPopulation[arrayStrategyNames.Length * arrayPair[index] + index1] = arrayNewPopulation[arrayStrategyNames.Length * arrayPair[index + 1] + index1];
+					arrayNewPopulation[arrayStrategyNames.Length * arrayPair[index + 1] + index1] = tmp;
 				}
 					index += 2;
 			}
 		}
 
-		void mutation()
+		private void mutation()
 		{
-			int valueMutationNumber = new Random().Next(1, valuePopulation - 1);
-			arrayNewPopulation[valueMutationNumber * valuePopulation + new Random().Next(1, chromosomLength - 1)] = !arrayNewPopulation[valueMutationNumber * valuePopulation + new Random().Next(1, chromosomLength - 1)];
+			int valueMutationNumber = new Random().Next(1, arrayStrategyNames.Length - 1);
+			arrayNewPopulation[valueMutationNumber * arrayStrategyNames.Length + new Random().Next(1, numberOfIteration - 1)] = !arrayNewPopulation[valueMutationNumber * arrayStrategyNames.Length + new Random().Next(1, numberOfIteration - 1)];
+		}
+
+		private bool getChromosome()
+		{
+			return arrayNewPopulation[new Random().Next(1, numberOfIteration*arrayStrategyNames.Length - 1)];
 		}
 	}
 }

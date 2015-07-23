@@ -9,8 +9,8 @@ namespace PrisionerDilemma
 {
 	public class Server
 	{
-		Player player1;
-		Player player2;
+		public Player player1;
+		public Player player2;
 
 		int defectCooperateRule;
 		int defectDefectRule;
