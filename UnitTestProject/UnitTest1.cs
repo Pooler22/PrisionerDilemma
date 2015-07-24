@@ -1,11 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrisionerDilemma;
-using System.Diagnostics;
 
 namespace UnitTestProject
 {
-	[TestClass]
+    [TestClass]
 	public class UnitTest1
 	{
 

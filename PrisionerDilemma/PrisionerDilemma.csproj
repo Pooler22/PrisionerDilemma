@@ -61,7 +61,6 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomExtensions.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Strategy.cs" />
     <Compile Include="StrategyCooperate.cs" />

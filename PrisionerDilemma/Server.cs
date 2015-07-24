@@ -58,16 +58,17 @@ namespace PrisionerDilemma
 			}
 			else if (lastAnswerPlayer1 == Decision.COOPERATE && lastAnswerPlayer2 == Decision.DEFECT)
 			{
-				player1.setDetails(lastAnswerPlayer2, defectCooperateRule);
-				player2.setDetails(lastAnswerPlayer1, cooperateDefectRule);
-				lastScorePlayer1 = cooperateDefectRule;
+                player1.setDetails(lastAnswerPlayer2, cooperateDefectRule);
+                player2.setDetails(lastAnswerPlayer1, defectCooperateRule);
+                lastScorePlayer1 = cooperateDefectRule;
 				lastScorePlayer2 = defectCooperateRule;
 			}
 			else if (lastAnswerPlayer1 == Decision.DEFECT && lastAnswerPlayer2 == Decision.COOPERATE)
 			{
 				player1.setDetails(lastAnswerPlayer2, defectCooperateRule);
 				player2.setDetails(lastAnswerPlayer1, cooperateDefectRule);
-				lastScorePlayer1 = defectCooperateRule;
+                
+                lastScorePlayer1 = defectCooperateRule;
 				lastScorePlayer2 = cooperateDefectRule;
 			}
 			else if (lastAnswerPlayer1 == Decision.COOPERATE && lastAnswerPlayer2 == Decision.COOPERATE)

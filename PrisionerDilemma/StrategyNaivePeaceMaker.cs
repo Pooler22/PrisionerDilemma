@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PrisionerDilemma
 {
 	//Naive Peace Maker (Tit For Tat with Random Co-operation) - Repeat opponent's last choice (ie Tit For Tat), but sometimes make peace by co-operating in lieu of defecting.*
-	class StrategyNaivePeaceMake : Strategy
+	class StrategyNaivePeaceMaker : Strategy
 	{
 		public override bool getDecision()
 		{

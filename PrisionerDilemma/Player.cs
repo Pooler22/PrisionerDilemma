@@ -13,7 +13,7 @@ namespace PrisionerDilemma
 		
 		public Player() 
 		{
-			score = 0;
+            score = new int();
 		}
 
 		public void setStrategy(string strategyName) 
