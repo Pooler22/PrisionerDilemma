@@ -28,30 +28,29 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.label1 = new System.Windows.Forms.Label();
-			this.SuspendLayout();
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(312, 52);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Instruction:\r\nSelect strategy form combobox for player1 and player2\r\nif selected " +
-    "\"StrategyHomoSpaiens\" then you can make decision.\r\nelse you cen set number of it" +
-    "eration and press button Play\r\n";
-			// 
-			// FormHelp
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(331, 72);
-			this.Controls.Add(this.label1);
-			this.Name = "FormHelp";
-			this.Text = "FormHelp";
-			this.ResumeLayout(false);
-			this.PerformLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHelp));
+            this.label1 = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(312, 117);
+            this.label1.TabIndex = 0;
+            this.label1.Text = resources.GetString("label1.Text");
+            // 
+            // FormHelp
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(310, 142);
+            this.Controls.Add(this.label1);
+            this.Name = "FormHelp";
+            this.Text = "FormHelp";
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 

@@ -54,6 +54,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -108,7 +109,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(596, 168);
+            this.button5.Location = new System.Drawing.Point(596, 115);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 27;
@@ -118,7 +119,7 @@
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(596, 115);
+            this.buttonReset.Location = new System.Drawing.Point(596, 144);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 26;
@@ -285,7 +286,7 @@
             // 
             // buttonHelp
             // 
-            this.buttonHelp.Location = new System.Drawing.Point(596, 214);
+            this.buttonHelp.Location = new System.Drawing.Point(596, 223);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(75, 23);
             this.buttonHelp.TabIndex = 32;
@@ -293,11 +294,22 @@
             this.buttonHelp.UseVisualStyleBackColor = true;
             this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(596, 173);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 33;
+            this.button1.Text = "All vs All";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 258);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonDefectPlayer1);
@@ -358,6 +370,7 @@
 		private System.Windows.Forms.ComboBox comboBoxPlayer2;
 		private System.Windows.Forms.Button buttonHelp;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-	}
+        private System.Windows.Forms.Button button1;
+    }
 }
 

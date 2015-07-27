@@ -158,6 +158,55 @@ namespace PrisionerDilemma
             server.setStrategy2(comboBoxPlayer1.SelectedItem.ToString());
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int n = arrayStrategyNames.Length - 1;
+            int m = 0;
+            
+            StringBuilder output = new System.Text.StringBuilder();
+            var saveFileDialog1 = new SaveFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                Filter = string.Format("{0}Text files (*.txt)|*.txt|All files (*.*)|*.*", "ARG0"),
+                RestoreDirectory = true,
+                ShowHelp = true,
+                CheckFileExists = false
+            };
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                for (int index1 = 0; index1 < n; index1++)
+                {
+                    m++;
+                    for (int index2 = m; index2 < n; index2++)
+                    {
+                        server = new Server();
+                        server.setRules(defectCooperateRule, cooperateCooperateRule, defectDefectRule, cooperateDefectRule);
+                        server.setStrategy1(arrayStrategyNames.ElementAt(index1));
+                        server.setStrategy2(arrayStrategyNames.ElementAt(index2));
+                        for(int i = 0; i < Int32.Parse(textBoxNumberOfIteration.Text); i++)
+                            server.play();
+
+                        output.AppendLine(server.player1.currentStrategy.ToString().Substring("PrisionerDilemma.Strategy".Length) + "\t" + server.player2.currentStrategy.ToString().Substring("PrisionerDilemma.Strategy".Length));
+                        output.AppendLine("Player1\tPlayer2");
+                    
+                        for (int index = 0; index < server.player1.currentStrategy.arrayWithEnemyAnswer.Count; index++)
+                            output.AppendLine(
+                                server.player1.currentStrategy.arrayWithEnemyAnswer[index].ToString() +
+                                "\t" +
+                                server.player1.scoreList.ElementAt(index) +
+                                "\t" +
+                                server.player2.currentStrategy.arrayWithEnemyAnswer[index].ToString() +
+                                "\t" +
+                                server.player2.scoreList.ElementAt(index)
+                                );
+                        output.AppendLine("\n"+server.player1.getScore()+"\t"+server.player2.getScore() + "\n");
+                        File.WriteAllText(saveFileDialog1.FileName, output.ToString());
+                    }
+                }
+            }
+
+        }
+
         public static void ThreadFromHelp()
 		{
 			Application.Run(new FormHelp());

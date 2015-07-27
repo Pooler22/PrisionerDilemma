@@ -117,4 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Instruction:
+Select strategy form combobox for player1 and player2
+if selected "StrategyHomoSpaiens" then you can make decision.
+else you cen set number of iteration and press button Play
+
+Select "Reset" to reset players answers
+
+Set number of iteration and select "All vs All" to generate file 
+with file anwers compare all strategy</value>
+  </data>
 </root>
