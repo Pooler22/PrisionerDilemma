@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,14 @@ namespace PrisionerDilemma
 {
 	public class Player
 	{
-		int score;
+		int scoreSum;
+        public List<int> scoreList;
 		public Strategy currentStrategy;
 		
 		public Player() 
 		{
-            score = new int();
+            scoreList = new List<int>();
+            scoreSum = new int();
 		}
 
 		public void setStrategy(string strategyName) 
@@ -33,13 +36,18 @@ namespace PrisionerDilemma
 
 		public int getScore()
 		{
-			return this.score;
+			return this.scoreSum;
 		}
+        public int getScore(int element)
+        {
+            return this.scoreList.ElementAt(element);
+        }
 
-		public void setDetails(bool enemyAnswer, int score) 
+        public void setDetails(bool enemyAnswer, int score) 
 		{
 			currentStrategy.arrayWithEnemyAnswer.Add(enemyAnswer);
-			this.score += score;
+			this.scoreSum += score;
+            this.scoreList.Add(score);
 		}
 	}
 }
