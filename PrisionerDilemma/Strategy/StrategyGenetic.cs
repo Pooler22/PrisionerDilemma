@@ -47,8 +47,7 @@ namespace PrisionerDilemma
 			mutation();
             lastDecision = getChromosome();
             numberOfIteration++;
-            return lastDecision;
-
+			return lastDecision;
         }
 
         private void generatePopulation()
@@ -58,7 +57,6 @@ namespace PrisionerDilemma
 				player.setStrategy(element);
 				arrayPopulation.Add(player.getDecision());
             }
-
 		}
 
 		private void evaluationOfAdaptation()
@@ -67,8 +65,8 @@ namespace PrisionerDilemma
 			{
                 if ((bool)arrayWithEnemyAnswer[arrayWithEnemyAnswer.Count - 1] == arrayNewPopulation[(numberOfIteration - 1) * numberOfPopulation + index])
                 {
-                    arrayEvaluationOfAdaptation[index] += 1;
-                    sizeRouletteWheel += 1;
+                    arrayEvaluationOfAdaptation[index]++;
+                    sizeRouletteWheel++;
                 }
 			}
 		}
@@ -90,8 +88,7 @@ namespace PrisionerDilemma
                         arrayNewPopulation.Add(arrayPopulation.ElementAt(numberOfIteration * numberOfPopulation + index1));
 						break;
 					}
-				}
-                
+				}   
             }
 		}
 
@@ -124,6 +121,7 @@ namespace PrisionerDilemma
                 n--;
             } while (n > 1);
         }
+		
 		private void hybridization()
 		{
             bool tmp;

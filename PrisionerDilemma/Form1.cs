@@ -187,19 +187,18 @@ namespace PrisionerDilemma
                             server.play();
 
                         output.AppendLine(server.player1.currentStrategy.ToString().Substring("PrisionerDilemma.Strategy".Length) + "\t" + server.player2.currentStrategy.ToString().Substring("PrisionerDilemma.Strategy".Length));
-                        output.AppendLine("Player1\tPlayer2");
                     
-                        for (int index = 0; index < server.player1.currentStrategy.arrayWithEnemyAnswer.Count; index++)
-                            output.AppendLine(
-                                server.player1.currentStrategy.arrayWithEnemyAnswer[index].ToString() +
-                                "\t" +
-                                server.player1.scoreList.ElementAt(index) +
-                                "\t" +
-                                server.player2.currentStrategy.arrayWithEnemyAnswer[index].ToString() +
-                                "\t" +
-                                server.player2.scoreList.ElementAt(index)
-                                );
-                        output.AppendLine("\n"+server.player1.getScore()+"\t"+server.player2.getScore() + "\n");
+						for (int index = 0; index < server.player1.currentStrategy.arrayWithEnemyAnswer.Count; index++)
+							output.AppendLine(
+								server.player1.currentStrategy.arrayWithEnemyAnswer[index].ToString() +
+								"\t" +
+								server.player1.scoreList.ElementAt(index) +
+								"\t" +
+								server.player2.currentStrategy.arrayWithEnemyAnswer[index].ToString() +
+								"\t" +
+								server.player2.scoreList.ElementAt(index)
+								);
+                        output.AppendLine(""+server.player1.getScore()+"\t"+server.player2.getScore() + "");
                         File.WriteAllText(saveFileDialog1.FileName, output.ToString());
                     }
                 }
@@ -229,11 +228,11 @@ namespace PrisionerDilemma
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 for (int index = 0; index < server.player1.currentStrategy.arrayWithEnemyAnswer.Count; index++)
                     output.AppendLine(
-                        server.player1.currentStrategy.arrayWithEnemyAnswer[index].ToString() +
+                        server.player2.currentStrategy.arrayWithEnemyAnswer[index].ToString()+
                         "\t" +
                         server.player1.scoreList.ElementAt(index)+
                         "\t" +
-                        server.player2.currentStrategy.arrayWithEnemyAnswer[index].ToString()+
+                        server.player1.currentStrategy.arrayWithEnemyAnswer[index].ToString() +
                         "\t"+
                         server.player2.scoreList.ElementAt(index)
                         );
