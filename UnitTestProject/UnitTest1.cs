@@ -98,16 +98,6 @@ namespace UnitTestProject
 		}
 
 		[TestMethod]
-		public void StrategyNaivePeaceMake()
-		{
-			Player player = new Player();
-			player.setStrategy("StrategyNaivePeaceMake");
-			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
-			player.setDetails(Decision.COOPERATE, 0);
-			Assert.AreEqual<bool>(player.getDecision(), Decision.COOPERATE);
-		}
-
-		[TestMethod]
 		public void StrategyGrudger()
 		{
 			Player player = new Player();

@@ -115,7 +115,7 @@
             this.button5.TabIndex = 27;
             this.button5.Text = "Save as txt";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.button_SaveTofile);
             // 
             // buttonReset
             // 
@@ -302,7 +302,7 @@
             this.button1.TabIndex = 33;
             this.button1.Text = "All vs All";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button_AllVsAll);
             // 
             // Form1
             // 

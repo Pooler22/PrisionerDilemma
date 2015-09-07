@@ -155,10 +155,10 @@ namespace PrisionerDilemma
             server = new Server();
             server.setRules(defectCooperateRule, cooperateCooperateRule, defectDefectRule, cooperateDefectRule);
             server.setStrategy1(comboBoxPlayer1.SelectedItem.ToString());
-            server.setStrategy2(comboBoxPlayer1.SelectedItem.ToString());
+            server.setStrategy2(comboBoxPlayer2.SelectedItem.ToString());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_AllVsAll(object sender, EventArgs e)
         {
             int n = arrayStrategyNames.Length - 1;
             int m = 0;
@@ -211,7 +211,7 @@ namespace PrisionerDilemma
 			Application.Run(new FormHelp());
 		}
 
-		private void button5_Click(object sender, EventArgs e)
+		private void button_SaveTofile(object sender, EventArgs e)
 		{
 			StringBuilder output = new System.Text.StringBuilder();
 			var saveFileDialog1 = new SaveFileDialog
